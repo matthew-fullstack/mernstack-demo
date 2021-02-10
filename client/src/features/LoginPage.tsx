@@ -19,44 +19,48 @@ export const LoginPage = () => {
       });
   };
   return (
-    <div className="mx-auto" style={{ width: "400px" }}>
-      <h1 className="mt-5">Login</h1>
-      <FinalForm
-        onSubmit={handleLogin}
-        render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <Field
-              component={TextInput}
-              name="email"
-              type="email"
-              label="Email"
-            />
-            <Field
-              component={TextInput}
-              name="password"
-              inputType="password"
-              label="Password"
-            />
-            <button
-              disabled={loading}
-              type="submit"
-              className="btn btn-primary mr-2"
-            >
-              Login
+    <div className="container">
+      <div className="row mt-md-5">
+        <div className="col-md-4 offset-md-4">
+          <h1>Login</h1>
+          <FinalForm
+            onSubmit={handleLogin}
+            render={({ handleSubmit }) => (
+              <form onSubmit={handleSubmit}>
+                <Field
+                  component={TextInput}
+                  name="email"
+                  type="email"
+                  label="Email"
+                />
+                <Field
+                  component={TextInput}
+                  name="password"
+                  inputType="password"
+                  label="Password"
+                />
+                <button
+                  disabled={loading}
+                  type="submit"
+                  className="btn btn-primary mr-2"
+                >
+                  Login
             </button>
-            <button
-              disabled={loading}
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => {
-                history.push("/signUp");
-              }}
-            >
-              Register
+                <button
+                  disabled={loading}
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    history.push("/signUp");
+                  }}
+                >
+                  Register
             </button>
-          </form>
-        )}
-      />
+              </form>
+            )}
+          />
+        </div>
+      </div>
     </div>
   );
 };

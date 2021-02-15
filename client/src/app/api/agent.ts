@@ -1,8 +1,21 @@
 import axios, { AxiosResponse } from "axios";
 import { request } from "http";
-import { loginFormValues } from "../models/loginFormValues";
+import { ILoginFormValues } from "../models/loginFormValues";
 
 axios.defaults.baseURL = "http://localhost:3001/api";
+
+axios.interceptors.request.use(
+  (config) => {
+    const token = window.localStorage.getItem('jwt');
+    if (token) {
+      config.headers.Authorization = "Bearer " + token;
+    }
+
+    return config;
+  },
+  (error) =>
+    Promise.reject(error)
+)
 
 // Adding delay for local
 const sleepDuration = 500;
@@ -25,7 +38,7 @@ const requests = {
 };
 
 const User = {
-  login: (formValues: loginFormValues) =>
+  login: (formValues: ILoginFormValues) =>
     requests.post("/user/login", formValues),
 };
 

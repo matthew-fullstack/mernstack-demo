@@ -4,17 +4,19 @@ import { Field, Form as FinalForm } from "react-final-form";
 import { history } from "..";
 import agent from "../app/api/agent";
 import TextInput from "../app/common/form/TextInput";
-import { loginFormValues } from "../app/models/loginFormValues";
+import { ILoginFormValues } from "../app/models/loginFormValues";
 
 export const LoginPage = () => {
   const [loading, setLoading] = useState(false);
-  const handleLogin = (values: loginFormValues) => {
+  const handleLogin = (values: ILoginFormValues) => {
     setLoading(true);
     agent.User.login(values)
       .then((data) => {
         console.log(data);
+        window.localStorage.setItem('jwt', data.token);
+        history.push('/dashboard')
       })
-      .finally(() => {
+      .catch(() => {
         setLoading(false);
       });
   };
